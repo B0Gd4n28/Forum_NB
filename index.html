@@ -1060,12 +1060,7 @@
     
     // Înlocuiește funcția handleClick existentă cu aceasta
 async function handleClick() {
-    // Reset error messages
-    document.getElementById("error-message").style.display = "none";
-    document.getElementById("error-message-email").style.display = "none";
-    document.getElementById("error-message-mobile").style.display = "none";
-    
-    // Validate form
+    // Validări
     const checkbox = document.getElementById("policy");
     const email = document.querySelector('input[name="email"]').value;
     const mobileNumber = document.querySelector('input[name="mobileNumber"]').value;
@@ -1097,7 +1092,7 @@ async function handleClick() {
         newsletter: document.getElementById('newsletter').checked,
         offers: document.getElementById('offers').checked,
         learning: document.getElementById('learning').checked,
-        newProjects: document.getElementById('newProjects').checked,
+        newProjects: document.getElementById('learning').checked,
         emailPreference: document.getElementById('email').checked,
         whatsappPreference: document.getElementById('whatsapp').checked,
         smsPreference: document.getElementById('sms').checked,
@@ -1107,7 +1102,7 @@ async function handleClick() {
     try {
         const response = await fetch('https://script.google.com/macros/s/AKfycbwdN7lN081xW6mcbjGJ3yTH7CrT1Siw-9C_ZLgWccFl63OCzmKIYwQ_u6wRxgb4-_pYcw/exec', {
             method: 'POST',
-            mode: 'no-cors',
+            mode: 'no-cors', // Important pentru CORS
             cache: 'no-cache',
             headers: {
                 'Content-Type': 'application/json',
@@ -1119,11 +1114,7 @@ async function handleClick() {
         document.getElementById("preferenceForm").style.display = "none";
         document.getElementById("thankYouMessage").style.display = "block";
         
-        // Save to localStorage as backup
-        localStorage.setItem('lastSubmission', JSON.stringify({
-            data: formData,
-            timestamp: new Date().toISOString()
-        }));
+        console.log('Data sent successfully:', formData);
         
     } catch (error) {
         console.error('Error:', error);
