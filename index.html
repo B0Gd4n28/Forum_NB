@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
       body{
         width:100% !important;
@@ -29,6 +31,21 @@
         padding:0px;
         box-sizing:border-box;
       }
+      .swal2-popup {
+        font-family: "Roboto", serif;
+    }
+
+    .swal2-title {
+        color: #b99300;
+    }
+
+    .swal2-confirm {
+        background-color: #b99300 !important;
+    }
+
+    .swal2-confirm:hover {
+        background-color: #a68200 !important;
+    }
       .clr-prmr{
         color:#000000;
       }
@@ -230,6 +247,8 @@
 
 
 
+
+
      
 .language-selector-container {
     position: relative;
@@ -285,6 +304,64 @@
         padding: 6px 28px 6px 30px;
     }
 }
+
+
+.header .col-lft.w40 img {
+    max-width: 180px;
+    height: auto;
+    filter: brightness(0) invert(58%) sepia(75%) saturate(481%) hue-rotate(360deg) brightness(89%) contrast(84%);
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+#submitButton {
+    padding: 12px 40px;
+    background-color: #b99300;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#submitButton:hover {
+    background-color: #a68200;
+}
+
+#submitButton:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Add these styles to your existing CSS */
+.my-custom-popup-class {
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.my-custom-button-class {
+    padding: 12px 40px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.swal2-icon {
+    border-color: #b99300;
+    color: #b99300;
+}
+
+.swal2-success-ring {
+    border-color: #b99300;
+}
+
+.swal2-loader {
+    border-color: #b99300 transparent #b99300 transparent;
+}
     </style>
   </head>
   <body>
@@ -293,7 +370,7 @@
   <div id="preferenceForm" class="container" style="display:block">
     <div class="header">
       <div class="col-lft w40">
-        <img src="https://northbucharest.ro/images/logo-black.svg" alt="" />
+        <img src="https://www.northbucharestinvestments.ro/dist/app/media/img/other/logo-white.svg" alt="" />
       </div>
       <div class="col-lft w60 txt-rgt">
         <h4 class="clr-scnd" id="updatePreferences">Actualizează-ți preferințele</h4>
@@ -761,7 +838,7 @@
               <div class="col-lft w55 selectWrap">
                 <select name="propertyType" class="w100" id="propertyTypeSelect">
                   <option id="propertyTypeOption">Selectează preferința</option>
-                  <option id="individualVilla">Vilă Individuală</option>
+                  <option id="individualVilla">Vilă </option>
                   <option id="studio">Studio</option>
                   <option id="doubleStudio">Studio dublu</option>
                   <option id="twoRoomApt">Apartament</option>
@@ -936,11 +1013,11 @@
               </div>
               <div class="col-lft w55 /*selectWrap*/">
                 <select name="timeZone" class="w100" id="timezoneSelect">
-                  <option id="timezoneOption">GST</option>
+                  <option id="timezoneOption">GMT</option>
                   
                 </select>
                 <div>
-                  <label class="lblHgt33" style="font-size:8px;color:#2f2f2f;" id="dubaiTimezoneLabel">Fus orar Dubai*</label>
+                  <label class="lblHgt33" style="font-size:8px;color:#2f2f2f;" id="dubaiTimezoneLabel">Fus orar România*</label>
                 </div>
               </div>
                 
@@ -1000,44 +1077,11 @@
         <div class="row hgt-30">
         </div>
         <div class="row">
-          <div class="checkBox">
-            <input name="privacyPolicy" type="checkbox" id="policy" name="policy"> <span id="privacyPolicyText">Am citit și sunt de acord cu <a href="https://promotions.damacproperties.com/en/privacy-policy/" target="_blank" id="privacyPolicyLink">Politica de confidențialitate.</a></span>
-          </div>
-          <br>
-          <div class="checkBox" style="color: red; display: none;" id="error-message">Trebuie să fii de acord cu politica de confidențialitate pentru a continua.</div>
-        </div>
-        <div class="row hgt-30">
-        </div>
-        <div class="row">
-          <input type="button" value="Actualizează" name="Update" onClick="handleClick()" id="updateButton">
+          <input type="button" value="Trimite" onclick="handleSubmit()" id="submitButton">
         </div>
         <div class="row hgt-30">
         </div>
       </form>
-    </div>
-  </div>
-  <div id="thankYouMessage" class="container" style="display:none">
-    <div class="header">
-      <div class="col-lft w40">
-        <img src="https://northbucharest.ro/images/logo-black.svg" alt="" />
-      </div>
-      <div class="clrfix"></div>
-    </div>
-    <div class="bodyContent">
-      <div class="row">
-        <div class="col-lft w20 col-xs-w100">
-          <h2 id="thankYouTitle">Mulțumim!</h2>
-        </div>
-      </div>
-      <div class="row hgt-15"></div>
-      <div class="row">
-        <div class="col-lft w100">
-          <br>
-          <p id="thankYouText">Preferințele tale au fost actualizate cu succes.</p>
-        </div>
-        <div class="clrfix"></div>
-      </div>
-      <div class="row hgt-15"></div>
     </div>
   </div>
   <script>
@@ -1120,6 +1164,97 @@ async function handleClick() {
         alert('A apărut o eroare. Vă rugăm să încercați din nou.');
     }
 }
+
+// Înlocuiește funcția handleSubmit cu aceasta
+async function handleSubmit() {
+    const formData = {
+        firstName: document.querySelector('input[name="firstName"]')?.value || '',
+        lastName: document.querySelector('input[name="lastName"]')?.value || '',
+        email: document.querySelector('input[name="email"]')?.value || '',
+        mobilePhone: (document.getElementById('mobileCountryCode')?.value || '') + 
+                    (document.querySelector('input[name="mobileNumber"]')?.value || ''),
+        propertyType: document.querySelector('select[name="propertyType"]')?.value || '',
+        numberOfBedroom: document.querySelector('select[name="numberOfBedroom"]')?.value || '',
+        location: document.querySelector('select[name="location"]')?.value || '',
+        budget: document.querySelector('select[name="budget"]')?.value || '',
+        callbackDate: document.querySelector('input[name="date"]')?.value || '',
+        time: document.querySelector('select[name="time"]')?.value || '',
+        newsletter: document.getElementById('newsletter')?.checked || false,
+        offers: document.getElementById('offers')?.checked || false,
+        learning: document.getElementById('learning')?.checked || false,
+        newProjects: document.getElementById('newProjects')?.checked || false,
+        emailPreference: document.getElementById('email')?.checked || false,
+        whatsappPreference: document.getElementById('whatsapp')?.checked || false,
+        smsPreference: document.getElementById('sms')?.checked || false,
+        phonePreference: document.getElementById('phone')?.checked || false
+    };
+
+    try {
+        // Loading state
+        Swal.fire({
+            title: '<img src="https://www.northbucharestinvestments.ro/dist/app/media/img/other/logo-white.svg" style="width: 200px; margin-bottom: 20px; filter: brightness(0) invert(58%) sepia(75%) saturate(481%) hue-rotate(360deg) brightness(89%) contrast(84%);">',
+            html: translations[document.getElementById('languageSelector').value].sendingMessage,
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            background: '#f9f9f9',
+            customClass: {
+                popup: 'my-custom-popup-class'
+            },
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwdN7lN081xW6mcbjGJ3yTH7CrT1Siw-9C_ZLgWccFl63OCzmKIYwQ_u6wRxgb4-_pYcw/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+
+        // Success message
+        const currentLang = document.getElementById('languageSelector').value;
+        await Swal.fire({
+            title: '<img src="https://www.northbucharestinvestments.ro/dist/app/media/img/other/logo-white.svg" style="width: 200px; margin-bottom: 20px; filter: brightness(0) invert(58%) sepia(75%) saturate(481%) hue-rotate(360deg) brightness(89%) contrast(84%);">',
+            html: `<h2 style="color: #b99300; margin-bottom: 15px;">${translations[currentLang].successTitle}</h2>
+                   <p style="color: #333;">${translations[currentLang].successMessage}</p>`,
+            icon: 'success',
+            confirmButtonText: translations[currentLang].okButton,
+            confirmButtonColor: '#b99300',
+            background: '#f9f9f9',
+            customClass: {
+                popup: 'my-custom-popup-class',
+                confirmButton: 'my-custom-button-class'
+            }
+        });
+
+        // Hide form after success
+        document.getElementById("preferenceForm").style.display = "none";
+        document.getElementById("thankYouMessage").style.display = "block";
+
+    } catch (error) {
+        console.error('Submission error:', error);
+        
+        // Show error message
+        const currentLang = document.getElementById('languageSelector').value;
+        await Swal.fire({
+            title: '<img src="https://www.northbucharestinvestments.ro/dist/app/media/img/other/logo-white.svg" style="width: 200px; margin-bottom: 20px; filter: brightness(0) invert(58%) sepia(75%) saturate(481%) hue-rotate(360deg) brightness(89%) contrast(84%);">',
+            html: `<h2 style="color: #b99300; margin-bottom: 15px;">${translations[currentLang].errorTitle}</h2>
+                   <p style="color: #333;">${translations[currentLang].errorMessage}</p>`,
+            icon: 'error',
+            confirmButtonText: translations[currentLang].okButton,
+            confirmButtonColor: '#b99300',
+            background: '#f9f9f9',
+            customClass: {
+                popup: 'my-custom-popup-class',
+                confirmButton: 'my-custom-button-class'
+            }
+        });
+    }
+}
   </script>
   <script>
     const translations = {
@@ -1164,11 +1299,12 @@ async function handleClick() {
         requestCall: "SOLICITĂ UN APEL",
         dateLabel: "Data",
         timezoneLabel: "Fus orar",
-        timezoneOption: "GST",
-        dubaiTimezoneLabel: "Fus orar Dubai*",
+        timezoneOption: "GMT",
+        romaniaTimezoneLabel: "Fus orar România*",
         timeLabel: "Ora",
         privacyPolicyText: 'Am citit și sunt de acord cu <a href="https://promotions.damacproperties.com/en/privacy-policy/" target="_blank" id="privacyPolicyLink">Politica de confidențialitate.</a>',
         updateButton: "Actualizează",
+        submitButton: "Trimite",
         thankYouTitle: "Mulțumim!",
         thankYouText: "Preferințele tale au fost actualizate cu succes.",
         locationOption: "Selectează zona",
@@ -1226,11 +1362,12 @@ async function handleClick() {
         requestCall: "REQUEST A CALL",
         dateLabel: "Date",
         timezoneLabel: "Timezone",
-        timezoneOption: "GST",
-        dubaiTimezoneLabel: "Dubai timezone*",
+        timezoneOption: "GMT",
+        romaniaTimezoneLabel: "Romania timezone*",
         timeLabel: "Time",
         privacyPolicyText: 'I have read and agree to the <a href="https://promotions.damacproperties.com/en/privacy-policy/" target="_blank" id="privacyPolicyLink">Privacy Policy.</a>',
         updateButton: "Update",
+        submitButton: "Submit",
         thankYouTitle: "Thank you!",
         thankYouText: "Your preferences have been updated successfully.",
         locationOption: "Select area",
@@ -1249,20 +1386,48 @@ async function handleClick() {
       }
     };
 
+    // Add these translations to your existing translations object
+translations.ro = {
+    ...translations.ro,
+    submitButtonText: "Trimite",
+    sendingMessage: 'Se trimite formularul...',
+    successTitle: 'Felicitări!',
+    successMessage: 'Formularul a fost trimis cu succes. În scurt timp veți fi contactat de către echipa noastră.',
+    errorTitle: 'Eroare!',
+    errorMessage: 'A apărut o eroare. Vă rugăm să încercați din nou.',
+    okButton: 'OK'
+};
+
+translations.en = {
+    ...translations.en,
+    submitButtonText: "Submit",
+    sendingMessage: 'Sending form...',
+    successTitle: 'Congratulations!',
+    successMessage: 'The form has been successfully submitted. Our team will contact you shortly.',
+    errorTitle: 'Error!',
+    errorMessage: 'An error occurred. Please try again.',
+    okButton: 'OK'
+};
+
     function setLanguage(lang) {
-      for (const key in translations[lang]) {
+    for (const key in translations[lang]) {
         const el = document.getElementById(key);
         if (el) {
-          if (key === "privacyPolicyText") {
-            el.innerHTML = translations[lang][key];
-          } else if (key === "updateButton") {
-            el.value = translations[lang][key];
-          } else {
-            el.innerText = translations[lang][key];
-          }
+            if (key === "privacyPolicyText") {
+                el.innerHTML = translations[lang][key];
+            } else {
+                el.innerText = translations[lang][key];
+            }
         }
-      }
     }
+    
+    // Actualizează textul butonului
+    const submitButton = document.getElementById('submitButton');
+    if (submitButton) {
+        submitButton.value = translations[lang].submitButtonText;
+    }
+}
+
     // Limba implicită: română
     setLanguage('ro');
     // ...restul scriptului existent...
